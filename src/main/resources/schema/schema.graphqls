@@ -1,0 +1,94 @@
+scalar DateTime
+scalar BigDecimal
+
+type Portfolio {
+    portfolioName: String!
+    currency: Currency!
+    portfolioItems: [Position!]!
+    lastUpdated: DateTime
+}
+
+type Watchlist implements Stock{
+    isin: String!
+    symbol: String!
+    stockName: String!
+    marketRate: Float!
+    currency: String
+}
+
+type Position implements Stock{
+    isin: String!
+    symbol: String!
+    stockName: String!
+    marketRate: Float!
+    quantitiy: Int!
+    currency: String
+}
+
+interface Stock {
+    isin: String!
+    symbol: String!
+    stockName: String!
+    marketRate: Float!
+    currency: String
+}
+
+enum Currency {
+    CHF
+    CNY
+    EUR
+    GBP
+    USD
+}
+
+type CurrencyQuote {
+    baseCurrency: String!
+    timeStamp: Int
+    quotes: [Quotes]!
+}
+
+type  Quotes{
+    currency: String!
+    quote: Float!
+}
+
+input StockAlertInput{
+    isin: String!
+    quantity: Int!
+    lowerLimit: Float!
+    upperLimit: Float!
+}
+
+type StockAlert{
+    id: ID!
+    isin: String!
+    quantity: Int!
+    lowerLimit: Float!
+    upperLimit: Float!
+}
+
+type CurrentStockPrice{
+    isin: String!
+    price: Float!
+}
+
+type  Query {
+    getAllPortfolios: [Portfolio]
+    getWatchlist: [Watchlist]
+    getExchangeRates(currency: Currency!) : CurrencyQuote
+    getAllStockAlerts: [StockAlert]
+}
+
+#type Mutation {
+#    addStockAlert(alert: StockAlertInput): StockAlert
+#}
+
+#type Subscription {
+#    getCurrentStockPrice(isin: String!): CurrentStockPrice
+#}
+
+schema {
+    query: Query
+    #mutation: Mutation
+    #subscription: Subscription
+}
