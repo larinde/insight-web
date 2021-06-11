@@ -16,32 +16,57 @@ repositories {
 	mavenCentral()
 }
 
+
+extra["springCloudVersion"] = "2020.0.3"
+extra["arrowVersion"] = "0.13.2"
 extra["testcontainersVersion"] = "1.15.3"
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web")
+
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-cache")
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+	implementation("org.springframework.cloud:spring-cloud-stream")
 
-	implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:3.11.0"))
+	implementation("com.yahoofinance-api:YahooFinanceAPI:3.15.0")
+
+
+	implementation(
+		platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:3.11.0")
+	)
 	implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
 	implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
 	implementation("com.netflix.graphql.dgs:graphql-dgs-subscriptions-websockets-autoconfigure")
 
+	implementation(
+		platform("io.arrow-kt:arrow-stack:${property("arrowVersion")}")
+	)
+	implementation("io.arrow-kt:arrow-core")
+
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
+	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.testcontainers:junit-jupiter")
+	testImplementation("com.jayway.jsonpath:json-path:2.2.0")
+	testImplementation("io.mockk:mockk:1.11.0")
+	testImplementation("org.assertj:assertj-core:3.19.0")
 }
 
 dependencyManagement {
 	imports {
 		mavenBom("org.testcontainers:testcontainers-bom:${property("testcontainersVersion")}")
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
 	}
 }
-
-
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
