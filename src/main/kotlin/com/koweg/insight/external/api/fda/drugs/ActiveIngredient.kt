@@ -1,4 +1,4 @@
-package com.koweg.insight.external.fda.drugs
+package com.koweg.insight.external.api.fda.drugs
 
 
 import com.fasterxml.jackson.annotation.JsonProperty

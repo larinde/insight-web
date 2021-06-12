@@ -1,4 +1,4 @@
-package com.koweg.insight.external.fda.devices
+package com.koweg.insight.external.api.fda.devices
 
 
 import com.fasterxml.jackson.annotation.JsonProperty

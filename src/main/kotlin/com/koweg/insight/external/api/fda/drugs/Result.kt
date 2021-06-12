@@ -1,17 +1,17 @@
-package com.koweg.insight.external.fda.drugs
+package com.koweg.insight.external.api.fda.drugs
 
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class Result(
-    @JsonProperty("application_number")
+        @JsonProperty("application_number")
     val applicationNumber: String,
-    @JsonProperty("openfda")
+        @JsonProperty("openfda")
     val openfda: Openfda,
-    @JsonProperty("products")
+        @JsonProperty("products")
     val products: List<Product>,
-    @JsonProperty("sponsor_name")
+        @JsonProperty("sponsor_name")
     val sponsorName: String,
-    @JsonProperty("submissions")
+        @JsonProperty("submissions")
     val submissions: List<Submission>
 )

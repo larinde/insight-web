@@ -10,10 +10,11 @@ plugins {
 
 group = "com.koweg.insight"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
 	mavenCentral()
+	mavenLocal()
 }
 
 
@@ -71,7 +72,7 @@ dependencyManagement {
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
+		jvmTarget = "1.8"
 	}
 }
 
@@ -83,5 +84,5 @@ tasks.withType<Test> {
 
 tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
 	generateClient = true
-	packageName = "com.koweg.insight.domain.data"
+	packageName = "com.koweg.insight.domain.generated"
 }

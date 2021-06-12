@@ -1,11 +1,11 @@
-package com.koweg.insight.external.fda.drugs
+package com.koweg.insight.external.api.fda.drugs
 
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class DrugApprovalSearch(
-    @JsonProperty("meta")
+        @JsonProperty("meta")
     val meta: Meta,
-    @JsonProperty("results")
+        @JsonProperty("results")
     val results: List<Result>
 )

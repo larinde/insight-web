@@ -1,11 +1,11 @@
-package com.koweg.insight.external.fda.devices
+package com.koweg.insight.external.api.fda.devices
 
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class DeviceApprovalSearch(
-    @JsonProperty("meta")
+        @JsonProperty("meta")
     val meta: Meta,
-    @JsonProperty("results")
+        @JsonProperty("results")
     val results: List<Result>
 )
