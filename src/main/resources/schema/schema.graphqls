@@ -1,82 +1,54 @@
-scalar DateTime
-scalar BigDecimal
-
-type Portfolio {
-    portfolioName: String!
-    currency: Currency!
-    portfolioItems: [Position!]!
-    lastUpdated: DateTime
-}
-
-type Watchlist implements Stock{
-    isin: String!
-    symbol: String!
-    stockName: String!
-    marketRate: Float!
-    currency: String
-}
-
-type Position implements Stock{
-    isin: String!
-    symbol: String!
-    stockName: String!
-    marketRate: Float!
-    quantitiy: Int!
-    currency: String
-}
-
-interface Stock {
-    isin: String!
-    symbol: String!
-    stockName: String!
-    marketRate: Float!
-    currency: String
-}
-
-enum Currency {
-    CHF
-    CNY
-    EUR
-    GBP
-    USD
-}
-
-type CurrencyQuote {
-    baseCurrency: String!
-    timeStamp: Int
-    quotes: [Quotes]!
-}
-
-type  Quotes{
-    currency: String!
-    quote: Float!
-}
-
-input StockAlertInput{
-    isin: String!
-    quantity: Int!
-    lowerLimit: Float!
-    upperLimit: Float!
-}
-
-type StockAlert{
-    id: ID!
-    isin: String!
-    quantity: Int!
-    lowerLimit: Float!
-    upperLimit: Float!
-}
-
-type CurrentStockPrice{
-    isin: String!
-    price: Float!
-}
-
-type  Query {
-    getAllPortfolios: [Portfolio]
+type Query {
+    getAllStockAlerts: [StockAlert]
+    portfolios(portfolioId: String): [Portfolio]
     getWatchlist: [Watchlist]
     getExchangeRates(currency: Currency!) : CurrencyQuote
-    getAllStockAlerts: [StockAlert]
+}
+
+
+
+
+#type Mutation {
+#    addReview(review: SubmittedReview): [Review]
+#    addArtwork(showId: Int!, upload: Upload!): [Image]! @skipcodegen
+#}
+#
+#type Subscription {
+#    reviewAdded(showId: Int!): Review
+#}
+#
+#type Show {
+#    id: Int!
+#    title: String!
+#    releaseYear: Int
+#    reviews: [Review]
+#    artwork: [Image]
+#}
+#
+#type Review {
+#    username: String
+#    starScore: Int
+#    submittedDate: DateTime
+#}
+#
+#input SubmittedReview {
+#    showId: Int!
+#    username: String!
+#    starScore: Int!
+#}
+#
+#type Image {
+#    url: String
+#}
+
+
+
+
+
+schema {
+    query: Query
+#    mutation: Mutation
+#    subscription: Subscription
 }
 
 #type Mutation {
@@ -87,8 +59,86 @@ type  Query {
 #    getCurrentStockPrice(isin: String!): CurrentStockPrice
 #}
 
-schema {
-    query: Query
-    #mutation: Mutation
-    #subscription: Subscription
+
+
+enum Currency {
+    CHF
+    CNY
+    EUR
+    GBP
+    USD
 }
+
+
+type  Quotes{
+    currency: String!
+    quote: Float!
+}
+
+type CurrencyQuote {
+    baseCurrency: String!
+    timeStamp: Int
+    quotes: [Quotes]!
+}
+
+type CurrentStockPrice{
+    isin: String!
+    price: Float!
+}
+
+
+interface Stock {
+    isin: String!
+    symbol: String!
+    stockName: String!
+    marketRate: Float!
+    currency: String
+}
+
+
+
+
+type Watchlist implements Stock{
+    isin: String!
+    symbol: String!
+    stockName: String!
+    marketRate: Float!
+    currency: String
+}
+
+
+type Position implements Stock{
+    isin: String!
+    symbol: String!
+    stockName: String!
+    marketRate: Float!
+    quantitiy: Int!
+    currency: String
+}
+
+
+type Portfolio {
+    portfolioName: String!
+    currency: String!
+    positions: [Position]
+    lastUpdated: DateTime
+}
+
+type StockAlert{
+    id: ID!
+    isin: String!
+    quantity: Int!
+    lowerLimit: Float!
+    upperLimit: Float!
+}
+
+input StockAlertInput{
+    isin: String!
+    quantity: Int!
+    lowerLimit: Float!
+    upperLimit: Float!
+}
+
+scalar DateTime
+scalar Upload
+directive @skipcodegen on FIELD_DEFINITION

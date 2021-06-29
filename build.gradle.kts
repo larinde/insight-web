@@ -1,27 +1,21 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-plugins {
-	id("org.springframework.boot") version "2.4.5"
-	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	kotlin("jvm") version "1.4.32"
-	kotlin("plugin.spring") version "1.4.32"
-	id("com.netflix.dgs.codegen") version "4.4.1"
-}
-
 group = "com.koweg.insight"
+
+
+
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
-
 repositories {
 	mavenCentral()
 	mavenLocal()
 }
 
-
 extra["springCloudVersion"] = "2020.0.3"
+
+
 extra["arrowVersion"] = "0.13.2"
 extra["testcontainersVersion"] = "1.15.3"
-
 dependencies {
 
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -69,6 +63,25 @@ dependencyManagement {
 	}
 }
 
+plugins {
+	id("org.springframework.boot") version "2.4.5"
+	id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	kotlin("jvm") version "1.4.32"
+	kotlin("plugin.spring") version "1.4.32"
+	id("com.netflix.dgs.codegen") version "4.4.1"
+	jacoco
+}
+
+jacoco {
+	toolVersion = "0.8.6"
+	reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
+}
+
+tasks.test{
+	finalizedBy(tasks.jacocoTestReport)
+}
+
+
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -79,8 +92,6 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
-
-
 
 tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
 	generateClient = true

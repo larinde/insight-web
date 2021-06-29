@@ -36,6 +36,7 @@ class BigDecimalScalarRegistration {
 }
 
 
+/*
 @DgsScalar(name = "DateTime")
 class DateTimeScalarRegistration : Coercing<LocalDateTime, String> {
     @Throws(CoercingSerializeException::class)
@@ -60,3 +61,4 @@ class DateTimeScalarRegistration : Coercing<LocalDateTime, String> {
         throw CoercingParseLiteralException("Value is not a valid ISO date time")
     }
 }
+*/

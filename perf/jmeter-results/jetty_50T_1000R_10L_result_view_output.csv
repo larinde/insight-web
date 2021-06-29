@@ -1,0 +1,41 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1575632505470,15974,getChargingStations Request,200,OK,Thread Group 1-1,text,true,,24349753,215,1,1,http://localhost:7000/chargingstations?page=0&pagesize=10000,15035,0,3
+1575632521456,19421,getChargingStations Request,200,OK,Thread Group 1-1,text,true,,24349752,215,2,2,http://localhost:7000/chargingstations?page=0&pagesize=10000,18510,0,1
+1575632525464,20780,getChargingStations Request,200,OK,Thread Group 1-2,text,true,,24349752,215,3,3,http://localhost:7000/chargingstations?page=0&pagesize=10000,19718,0,1
+1575632540883,24758,getChargingStations Request,200,OK,Thread Group 1-1,text,true,,24349752,215,4,4,http://localhost:7000/chargingstations?page=0&pagesize=10000,23690,0,2
+1575632545480,28142,getChargingStations Request,200,OK,Thread Group 1-3,text,true,,24349752,215,4,4,http://localhost:7000/chargingstations?page=0&pagesize=10000,27006,0,1
+1575632546252,28020,getChargingStations Request,200,OK,Thread Group 1-2,text,true,,24349751,215,4,4,http://localhost:7000/chargingstations?page=0&pagesize=10000,26898,0,1
+1575632565648,33224,getChargingStations Request,200,OK,Thread Group 1-1,text,true,,24349752,215,5,5,http://localhost:7000/chargingstations?page=0&pagesize=10000,32115,0,2
+1575632565469,33507,getChargingStations Request,200,OK,Thread Group 1-4,text,true,,24349752,215,5,5,http://localhost:7000/chargingstations?page=0&pagesize=10000,32419,0,3
+1575632573630,43080,getChargingStations Request,200,OK,Thread Group 1-3,text,true,,24349752,215,6,6,http://localhost:7000/chargingstations?page=0&pagesize=10000,41297,0,2
+1575632574279,43181,getChargingStations Request,200,OK,Thread Group 1-2,text,true,,24349751,215,6,6,http://localhost:7000/chargingstations?page=0&pagesize=10000,41730,0,1
+1575632585489,56614,getChargingStations Request,200,OK,Thread Group 1-5,text,true,,24349752,215,7,7,http://localhost:7000/chargingstations?page=0&pagesize=10000,50840,0,1
+1575632598881,58850,getChargingStations Request,200,OK,Thread Group 1-1,text,true,,24349752,215,8,8,http://localhost:7000/chargingstations?page=0&pagesize=10000,54775,0,1
+1575632598986,59463,getChargingStations Request,200,OK,Thread Group 1-4,text,true,,24349753,215,8,8,http://localhost:7000/chargingstations?page=0&pagesize=10000,55465,0,1
+1575632616724,67192,getChargingStations Request,200,OK,Thread Group 1-3,text,true,,24349751,215,9,9,http://localhost:7000/chargingstations?page=0&pagesize=10000,65061,0,1
+1575632605480,84221,getChargingStations Request,200,OK,Thread Group 1-6,text,true,,24349752,215,10,10,http://localhost:7000/chargingstations?page=0&pagesize=10000,78075,0,2
+1575632617473,72438,getChargingStations Request,200,OK,Thread Group 1-2,text,true,,24349752,215,10,10,http://localhost:7000/chargingstations?page=0&pagesize=10000,66403,0,1
+1575632625466,103749,getChargingStations Request,200,OK,Thread Group 1-7,text,true,,24349751,215,12,12,http://localhost:7000/chargingstations?page=0&pagesize=10000,80987,0,1
+1575632642118,91528,getChargingStations Request,200,OK,Thread Group 1-5,text,true,,24349753,215,12,12,http://localhost:7000/chargingstations?page=0&pagesize=10000,87311,0,2
+1575632645490,88601,getChargingStations Request,200,OK,Thread Group 1-8,text,true,,24349752,215,12,12,http://localhost:7000/chargingstations?page=0&pagesize=10000,84154,0,1
+1575632658461,100665,getChargingStations Request,200,OK,Thread Group 1-4,text,true,,24349751,215,13,13,http://localhost:7000/chargingstations?page=0&pagesize=10000,94764,0,2
+1575632665462,93751,getChargingStations Request,200,OK,Thread Group 1-9,text,true,,24349752,215,13,13,http://localhost:7000/chargingstations?page=0&pagesize=10000,87741,0,1
+1575632657743,101701,getChargingStations Request,200,OK,Thread Group 1-1,text,true,,24349752,215,13,13,http://localhost:7000/chargingstations?page=0&pagesize=10000,95584,0,1
+1575632745482,33223,getChargingStations Request,503,Service Unavailable,Thread Group 1-13,text,false,,422,215,14,14,http://localhost:7000/chargingstations?page=0&pagesize=10000,33222,0,1
+1575632683926,96111,getChargingStations Request,200,OK,Thread Group 1-3,text,true,,24349753,215,14,14,http://localhost:7000/chargingstations?page=0&pagesize=10000,93761,0,2
+1575632685479,102982,getChargingStations Request,200,OK,Thread Group 1-10,text,true,,24349752,215,15,15,http://localhost:7000/chargingstations?page=0&pagesize=10000,98897,0,1
+1575632689921,99488,getChargingStations Request,200,OK,Thread Group 1-2,text,true,,24349751,215,15,15,http://localhost:7000/chargingstations?page=0&pagesize=10000,95271,0,1
+1575632759138,30363,getChargingStations Request,503,Service Unavailable,Thread Group 1-4,text,false,,422,215,15,15,http://localhost:7000/chargingstations?page=0&pagesize=10000,30363,0,3
+1575632689716,100261,getChargingStations Request,200,OK,Thread Group 1-6,text,true,,24349752,215,15,15,http://localhost:7000/chargingstations?page=0&pagesize=10000,97994,0,78
+1575632778713,44289,getChargingStations Request,503,Service Unavailable,Thread Group 1-13,text,false,,422,215,16,16,http://localhost:7000/chargingstations?page=0&pagesize=10000,44287,0,2
+1575632789504,33501,getChargingStations Request,503,Service Unavailable,Thread Group 1-4,text,false,,422,215,16,16,http://localhost:7000/chargingstations?page=0&pagesize=10000,33500,0,1
+1575632789989,33021,getChargingStations Request,503,Service Unavailable,Thread Group 1-6,text,false,,421,215,16,16,http://localhost:7000/chargingstations?page=0&pagesize=10000,33021,0,1
+1575632789421,33591,getChargingStations Request,503,Service Unavailable,Thread Group 1-2,text,false,,423,215,16,16,http://localhost:7000/chargingstations?page=0&pagesize=10000,33590,0,3
+1575632780049,43130,getChargingStations Request,503,Service Unavailable,Thread Group 1-3,text,false,,422,215,16,16,http://localhost:7000/chargingstations?page=0&pagesize=10000,43125,0,1
+1575632705482,121170,getChargingStations Request,200,OK,Thread Group 1-11,text,true,,24349752,215,17,17,http://localhost:7000/chargingstations?page=0&pagesize=10000,118271,0,4
+1575632729229,100030,getChargingStations Request,200,OK,Thread Group 1-7,text,true,,24349752,215,16,16,http://localhost:7000/chargingstations?page=0&pagesize=10000,95545,0,2
+1575632823015,30653,getChargingStations Request,503,Service Unavailable,Thread Group 1-6,text,false,,422,215,17,17,http://localhost:7000/chargingstations?page=0&pagesize=10000,30653,0,1
+1575632805481,48185,getChargingStations Request,503,Service Unavailable,Thread Group 1-16,text,false,,422,215,17,17,http://localhost:7000/chargingstations?page=0&pagesize=10000,48185,0,2
+1575632853675,32033,getChargingStations Request,503,Service Unavailable,Thread Group 1-16,text,false,,421,215,13,13,http://localhost:7000/chargingstations?page=0&pagesize=10000,32032,0,55
+1575632865460,31101,getChargingStations Request,503,Service Unavailable,Thread Group 1-19,text,false,,422,215,13,13,http://localhost:7000/chargingstations?page=0&pagesize=10000,31101,0,1
+1575632823017,101866,getChargingStations Request,200,OK,Thread Group 1-2,text,true,,24349752,215,11,11,http://localhost:7000/chargingstations?page=0&pagesize=10000,83776,0,1
