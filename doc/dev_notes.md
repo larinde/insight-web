@@ -3,7 +3,7 @@
 ## Create and switch branch
 
 ```bash
- git checkout -b azure-function
+ git checkout -b azure-functions
 ```
 
 ## Links
