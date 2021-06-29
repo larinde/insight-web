@@ -1,5 +1,11 @@
 type Query {
+    """
+    Retrieve all stock alerts
+    """
     getAllStockAlerts: [StockAlert]
+    """
+    Retrieve portfolio and their positions by unique portfolio identifier.
+    """
     portfolios(portfolioId: String): [Portfolio]
     getWatchlist: [Watchlist]
     getExchangeRates(currency: Currency!) : CurrencyQuote
