@@ -3,9 +3,10 @@ package com.koweg.insight.domain.datafetchers
 import com.koweg.insight.domain.generated.types.StockAlert
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsQuery
+import java.util.function.Function
 
 @DgsComponent
-class StockAlertsDataFetcher {
+class StockAlertsDataFetcher : Function<Any,  List<StockAlert>> {
     private val stockAlertRepository= listOf<StockAlert>(
         StockAlert("1", "BNGO", 100, 5.23, 7.15),
         StockAlert("2", "BNGO", 5000, 10.00, 15.00),
@@ -14,6 +15,10 @@ class StockAlertsDataFetcher {
     @DgsQuery
     fun getAllStockAlerts(): List<StockAlert>{
         return stockAlertRepository
+    }
+
+    override fun apply(t: Any):  List<StockAlert> {
+        return getAllStockAlerts()
     }
 
 }
