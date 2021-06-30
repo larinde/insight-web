@@ -1,11 +1,28 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+
+plugins {
+
+	//id("org.springframework.boot") version "2.5.2"
+	//id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	//kotlin("jvm") version "1.5.20"
+	//kotlin("plugin.spring") version "1.5.20"
+
+	//id("org.springframework.boot") version "2.4.5"
+	id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	kotlin("jvm") version "1.4.32"
+	kotlin("plugin.spring") version "1.4.32"
+	id("com.netflix.dgs.codegen") version "4.4.1"
+	//jacoco
+	id("com.microsoft.azure.azurefunctions") version "1.5.0"
+}
+
 group = "com.koweg.insight"
 
 
 
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_1_8
 repositories {
 	mavenCentral()
 	mavenLocal()
@@ -22,20 +39,16 @@ dependencies {
 	implementation ("com.microsoft.azure.functions:azure-functions-java-library")
 
 	implementation("org.springframework.cloud:spring-cloud-function-adapter-azure")
+	implementation("org.springframework.cloud:spring-cloud-function-kotlin")
 
 	//implementation("org.springframework.cloud:spring-cloud-starter-function-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
-	//implementation("org.springframework.boot:spring-boot-starter-cache")
-	//implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
-	//implementation("org.springframework.boot:spring-boot-starter-data-redis")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework.boot:spring-boot-starter-webflux")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	//implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-	implementation("org.springframework.cloud:spring-cloud-stream")
 
 	implementation("com.yahoofinance-api:YahooFinanceAPI:3.15.0")
 
@@ -47,7 +60,13 @@ dependencies {
 	implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
 	implementation("com.netflix.graphql.dgs:graphql-dgs-subscriptions-websockets-autoconfigure")
 
-/*
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.3")
+	implementation ("com.fasterxml.jackson.core:jackson-core:2.12.3")
+	implementation ("com.fasterxml.jackson.core:jackson-annotations:2.12.3")
+	implementation ("com.fasterxml.jackson.core:jackson-databind:2.12.3")
+
+
+/*#
 	implementation(
 		platform("io.arrow-kt:arrow-stack:${property("arrowVersion")}")
 	)
@@ -69,22 +88,6 @@ dependencyManagement {
 		mavenBom("com.microsoft.azure.functions:azure-functions-java-library:${property("azureFunctionsVersion")}")
 		//mavenBom("org.testcontainers:testcontainers-bom:${property("testcontainersVersion")}")
 	}
-}
-
-plugins {
-
-	//id("org.springframework.boot") version "2.5.2"
-	//id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	//kotlin("jvm") version "1.5.20"
-	//kotlin("plugin.spring") version "1.5.20"
-
-	//id("org.springframework.boot") version "2.4.5"
-	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	kotlin("jvm") version "1.4.32"
-	kotlin("plugin.spring") version "1.4.32"
-	id("com.netflix.dgs.codegen") version "4.4.1"
-	//jacoco
-	id("com.microsoft.azure.azurefunctions") version "1.5.0"
 }
 
 
