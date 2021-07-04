@@ -35,7 +35,6 @@ class BigDecimalScalarRegistration {
     }
 }
 
-
 /*
 @DgsScalar(name = "DateTime")
 class DateTimeScalarRegistration : Coercing<LocalDateTime, String> {

@@ -35,7 +35,7 @@ dependencies {
 
 
 	implementation(
-		platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:3.11.0")
+		platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:4.3.1")
 	)
 	implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
 	implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
