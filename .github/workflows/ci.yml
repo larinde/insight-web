@@ -5,9 +5,16 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ * ]
+    branches:
+      - main
+      - master
+      - azure-functions
+      - 'feature/**'
+      - 'releases/**'
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - master
 
 jobs:
   build:
