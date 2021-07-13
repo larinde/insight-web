@@ -32,48 +32,49 @@ extra["springCloudFunctionVersion"] = "3.1.3"
 extra["springCloudVersion"] = "2020.0.3"
 extra["arrowVersion"] = "0.13.2"
 extra["testcontainersVersion"] = "1.15.3"
+extra["dgsPlatformVersion"] = "4.3.1"
 
+
+/*
+dependencies {
+	testImplementation("org.springframework.boot:spring-boot-starter-test"){
+		exclude("junit", "junit")
+	}
+}
+*/
 
 dependencies {
 	//implementation ("commons-io:commons-io:2.10.0")
 	implementation ("com.microsoft.azure.functions:azure-functions-java-library")
 
-	implementation("org.springframework.cloud:spring-cloud-function-adapter-azure")
+	implementation("org.springframework.cloud:spring-cloud-function-adapter-azure"){
+		exclude("com.fasterxml.jackson.core")
+	}
 	implementation("org.springframework.cloud:spring-cloud-function-kotlin")
-
+	implementation("org.springframework.cloud:spring-cloud-starter-function-web")
 	//implementation("org.springframework.cloud:spring-cloud-starter-function-webflux")
-	implementation("org.springframework.boot:spring-boot-starter-actuator")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	//implementation("org.springframework.boot:spring-boot-starter-webflux")
+
+//	implementation("org.springframework.boot:spring-boot-starter-web"){
+//		exclude("com.fasterxml.jackson.core")
+//	}
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
-	implementation("com.yahoofinance-api:YahooFinanceAPI:3.15.0")
+	implementation("com.yahoofinance-api:YahooFinanceAPI:3.15.0"){
+		exclude("com.fasterxml.jackson.core")
+	}
 
 
 	implementation(
-		platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:3.11.0")
+		platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:${property("dgsPlatformVersion")}")
 	)
 	implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
 	implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
 	implementation("com.netflix.graphql.dgs:graphql-dgs-subscriptions-websockets-autoconfigure")
-
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.3")
-	implementation ("com.fasterxml.jackson.core:jackson-core:2.12.3")
-	implementation ("com.fasterxml.jackson.core:jackson-annotations:2.12.3")
-	implementation ("com.fasterxml.jackson.core:jackson-databind:2.12.3")
-
-
-/*#
-	implementation(
-		platform("io.arrow-kt:arrow-stack:${property("arrowVersion")}")
-	)
-	implementation("io.arrow-kt:arrow-core")
-*/
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	//testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
 	testImplementation("io.projectreactor:reactor-test")
 	//testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("com.jayway.jsonpath:json-path:2.2.0")
@@ -91,22 +92,12 @@ dependencyManagement {
 }
 
 
-
-/*
-jacoco {
-	toolVersion = "0.8.6"
-	reportsDirectory.set(layout.buildDirectory.dir(projectDir.absolutePath+"build/jacoco-reports"))
-}
-*/
-
-
-
 azurefunctions {
 	subscription = "f2b3ce42-63af-41f3-932b-e1b2bf83ad6f"
-	resourceGroup = "insightWebAzFctnsResourceGroup"
-	appName = "insight-web-az-fctns"
+	resourceGroup = "kowegAzFctnGrp"
+	appName = "azureFctnSpring"
 	pricingTier = "Consumption"
-	region = "uksouth"
+	region = "westus"
 	runtime to ("os" to "linux")
 	appSettings to ("fdaEventsPublicationEndpoint" to "https://api.fda.gov/drug/drugsfda.json")
 	authentication to ("type" to "azure_cli")
@@ -150,5 +141,5 @@ tasks.withType<Test> {
 
 tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
 	generateClient = true
-	packageName = "com.koweg.insight.domain.generated"
+	packageName = "uk.co.koweg.insight.domain.api.generated"
 }

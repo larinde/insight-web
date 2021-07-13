@@ -14,6 +14,11 @@
 https://github.com/microsoft/azure-gradle-plugins/blob/master/azure-functions-gradle-plugin/README.md
 
 
+./gradlew azureFunctionsPackage
+./gradlew azureFunctionsRun
+./gradlew azureFunctionsDeploy
+
+
 ## Docker runtime function
 
 Further reading:
@@ -72,3 +77,37 @@ https://javascript.plainenglish.io/what-is-http-3-and-why-does-it-matter-cb7d7b4
 
 https://levelup.gitconnected.com/creating-and-filling-a-postgres-db-with-docker-compose-e1607f6f882f
 
+## deleting branches
+
+remote
+
+``` bash
+ git push origin --delete remote-branch-name
+```
+
+local
+
+``` bash
+ git branch -d local-branch-name
+```
+
+## Test containers for Azure functions
+
+https://hub.docker.com/_/microsoft-azure-functions-java
+https://hub.docker.com/_/microsoft-azure-functions-base
+
+https://cloud.spring.io/spring-cloud-static/spring-cloud-function/2.0.0.RELEASE/multi/multi__functional_bean_definitions.html
+
+## TODO - 03-07-2021
+
+1. create a resource for running Java Azure Functions
+   1. Follow doc guide
+   2. Understand Azure Cli commands
+   3. ``` https://blog.nebrass.fr/playing-with-spring-cloud-in-azure-functions/ ```
+2. Deploy Insight app to Azure
+3. Read and understand Spring Cloud Functions documentation
+
+
+
+https://github.com/graphql-java-kickstart/graphql-java-tools/issues/157
+4. Find a way to inspect spring runtime beans.
