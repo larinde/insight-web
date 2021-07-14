@@ -1,22 +1,9 @@
-# This workflow will build a Java project with Gradle
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
-
 name: Scheduled Performance Testing
 
 on:
   schedule:
     # Trigger @ 5 min intervals
     - cron:  '*/5 * * * *'
-    branches:
-      - main
-      - master
-      - azure-functions
-      - 'feature/**'
-      - 'releases/**'
-  pull_request:
-    branches:
-      - main
-      - master
 
 jobs:
   jmeter-run:
