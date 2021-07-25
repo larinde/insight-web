@@ -1,3 +1,3 @@
 package uk.co.koweg.insight.azure
 
-data class RequestWrapper( val data: String)
+data class RequestWrapper( val query: String)
