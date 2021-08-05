@@ -1,0 +1,92 @@
+@startuml
+
+title Software Architecture
+
+left to right direction
+
+!include <elastic/common>
+!include <elastic/elasticsearch/elasticsearch>
+
+sprite graphql ./images/graphql-icon.png
+
+'scale max 800 height
+'scale max 1024 width
+scale 2
+
+skinparam packageStyle rect
+
+skinparam database {
+    BackgroundColor    #6A9EFF
+}
+
+skinparam usecase {
+    BackgroundColor    #6A9EFF
+    BorderColor        black
+}
+
+
+skinparam componentStyle uml2
+
+skinparam component {
+    FontColor          Black
+    AttributeFontColor Black
+    FontSize           17
+    AttributeFontSize  15
+    AttributeFontname  Droid Sans Mono
+    BackgroundColor    LightSteelBlue
+    BorderColor        Black
+    ArrowColor         Black
+}
+
+skinparam sequence {
+ArrowColor Black
+ActorBorderColor Black
+LifeLineBorderColor Black
+LifeLineBackgroundColor LightSteelBlue
+ParticipantBorderColor Black
+ParticipantBackgroundColor LightSteelBlue
+ActorBackgroundColor aqua
+ActorFontColor Black
+}
+
+skinparam database {
+	BackgroundColor transparent
+	BorderColor transparent
+}
+
+skinparam rectangle {
+	BackgroundColor transparent
+	BorderColor transparent
+}
+
+skinparam node {
+	BackgroundColor transparent
+	BorderColor transparent
+}
+
+skinparam Note {
+	BackgroundColor transparent
+	BorderColor transparent
+}
+
+'rectangle  "<img:./images/device_laptop.png>" as device_laptop
+'rectangle  "<img:./images/device_lcd_monitor.png>" as device_lcd_monitor
+'rectangle  "<img:./images/device_tablet_ipad.png>" as device_tablet_ipad
+
+
+component dataCollector[
+    <$graphql{scale=0.5}>
+]
+
+
+
+
+Rectangle "External Services"{
+    [Stock Alerts  ]  <-- (dataCollector) : LIMITS EXCEEDED
+    [FX Rates      ]  <-- (dataCollector) : CURRENCY CONVERSION
+    [FDA Updates   ]  <-- (dataCollector) : FDA CATALYSTS
+    [Earnings Cal. ]  <-- (dataCollector) : UPCOMING EARNINGS REPORT
+}
+
+
+@enduml
