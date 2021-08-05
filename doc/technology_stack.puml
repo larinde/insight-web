@@ -1,0 +1,41 @@
+@startuml
+
+'title Technology Stack
+
+top to bottom direction
+
+scale 2
+
+skinparam packageStyle rect
+
+
+skinparam rectangle {
+	BackgroundColor transparent
+	BorderColor transparent
+}
+
+Rectangle "Technology Stack"{
+    
+    rectangle apiSpecification [
+     GraphQL
+     Open API
+    ]
+
+    rectangle testing[
+     PACT
+     BlazeMeter
+     Gatling
+    ]
+
+    rectangle implementation[
+     Kotlin
+     Spring Boot
+     Netflix DGS
+    ]
+
+}
+
+apiSpecification -[hidden]- implementation
+implementation -[hidden]-  testing
+
+@enduml
