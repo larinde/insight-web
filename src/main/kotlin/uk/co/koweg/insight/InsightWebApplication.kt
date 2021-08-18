@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
 //@DgsComponent
 //open class BigDecimalScalarRegistration {
 //    @DgsRuntimeWiring
-//    fun addScalar(builder: RuntimeWiring.Builder): RuntimeWiring.Builder {
+//    fun addScalar(builder: RuntimeWiring.Builder): RduntimeWiring.Builder {
 //        return builder.scalar(Scalars.GraphQLBigDecimal)
 //    }
 //}

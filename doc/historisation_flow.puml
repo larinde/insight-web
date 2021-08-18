@@ -1,0 +1,109 @@
+@startuml
+
+title Data Historisation Flow
+
+left to right direction
+
+!include <elastic/common>
+!include <elastic/elasticsearch/elasticsearch>
+
+sprite fluentd ./images/fluentd_logo.png
+sprite graphql ./images/graphql-icon.png
+
+'scale max 800 height
+'scale max 1024 width
+scale 2
+
+skinparam packageStyle rect
+
+skinparam database {
+    BackgroundColor    #6A9EFF
+}
+
+skinparam usecase {
+    BackgroundColor    #6A9EFF
+    BorderColor        black
+}
+
+
+skinparam componentStyle uml2
+
+skinparam component {
+    FontColor          Black
+    AttributeFontColor Black
+    FontSize           17
+    AttributeFontSize  15
+    AttributeFontname  Droid Sans Mono
+    BackgroundColor    LightSteelBlue
+    BorderColor        Black
+    ArrowColor         Black
+}
+
+skinparam sequence {
+ArrowColor Black
+ActorBorderColor Black
+LifeLineBorderColor Black
+LifeLineBackgroundColor LightSteelBlue
+ParticipantBorderColor Black
+ParticipantBackgroundColor LightSteelBlue
+ActorBackgroundColor aqua
+ActorFontColor Black
+}
+
+skinparam database {
+	BackgroundColor transparent
+	BorderColor transparent
+}
+
+skinparam rectangle {
+	BackgroundColor transparent
+	BorderColor transparent
+}
+
+skinparam node {
+	BackgroundColor transparent
+	BorderColor transparent
+}
+
+skinparam Note {
+	BackgroundColor transparent
+	BorderColor transparent
+}
+
+rectangle  "<img:./images/device_laptop.png>" as device_laptop
+rectangle  "<img:./images/device_lcd_monitor.png>" as device_lcd_monitor
+rectangle  "<img:./images/device_tablet_ipad.png>" as device_tablet_ipad
+
+
+rectangle dataCollector[
+    <$fluentd{scale=0.5}>
+]
+
+rectangle graphqlServer[
+    <$graphql{scale=0.5}>
+]
+
+
+
+ELASTICSEARCH(historisationElasticInstance, "Historisation Data",node)
+
+Rectangle "Securities Services"{
+    [FDA Updates]  --> (dataCollector) : DRUG_APPROVED
+    [FOREX]  --> (dataCollector) : RATE_UPDATED
+    [MARKET RATES]  --> (dataCollector) : PRICE_LIMIT_EXCEEDED
+    [PORTFOLIO]  --> (dataCollector) : POSITION_UPDATED
+}
+
+dataCollector --> historisationElasticInstance
+
+historisationElasticInstance  --> graphqlServer
+
+graphqlServer --> device_lcd_monitor 
+graphqlServer --> device_laptop 
+graphqlServer --> device_tablet_ipad 
+
+Note top of dataCollector: Fluentd \n - Provides a unified logging layer \n - Supports asynchronous and synchronous modes of communication
+
+Note top of graphqlServer: GraphQL-based Microservice: \n - Provides a client-driven architecture that enables consumers selectively customise their individual response data set   \n - Optimises usage of network bandwidth by reducing query calls required to build an aggregate response message
+
+@enduml

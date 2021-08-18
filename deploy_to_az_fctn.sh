@@ -21,6 +21,7 @@ az functionapp create \
   --storage-account $storageAcc \
   --consumption-plan-location $location \
   --resource-group $rg \
+  --runtime java \
   --functions-version 2
 
 az functionapp deployment source config-zip -n $appName -g $rg --src $packageFile

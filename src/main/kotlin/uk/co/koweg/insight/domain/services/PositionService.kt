@@ -24,7 +24,6 @@ private val positionRepository = mapOf<String, MutableList<Position>>(
 @Service
 class PositionServiceImpl : PositionService {
     override fun positionsForPortfolio(portfolioNames: List<String>): Map<String, List<Position>> {
-        println("\n***********loading  portfolio positions: " + portfolioNames.get(0))
         return positionRepository.filter { portfolioNames.contains(it.key) }
     }
 

@@ -44,3 +44,5 @@ uploaded-images
 **/*private*
 
 **/target
+
+**.nupkg

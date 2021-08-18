@@ -55,7 +55,15 @@ http://localhost:7071/api/graphql
 
 
 
+## Creating NuGet package
 
+```bash
+ nuget spec 
+ mv .nuspec insight-web.nuspec
+ mvn clean  azure-functions:package
+ # update manifest and run command below
+ nuget pack insight-web.nuspec 
+```
 
 
 

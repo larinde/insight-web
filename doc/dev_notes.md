@@ -13,11 +13,9 @@
 
 https://github.com/microsoft/azure-gradle-plugins/blob/master/azure-functions-gradle-plugin/README.md
 
-
 ./gradlew azureFunctionsPackage
 ./gradlew azureFunctionsRun
 ./gradlew azureFunctionsDeploy
-
 
 ## Docker runtime function
 
@@ -106,8 +104,48 @@ https://cloud.spring.io/spring-cloud-static/spring-cloud-function/2.0.0.RELEASE/
    3. ``` https://blog.nebrass.fr/playing-with-spring-cloud-in-azure-functions/ ```
 2. Deploy Insight app to Azure
 3. Read and understand Spring Cloud Functions documentation
-
-
-
-https://github.com/graphql-java-kickstart/graphql-java-tools/issues/157
 4. Find a way to inspect spring runtime beans.
+
+
+
+
+
+
+8.3 Limitations of Functional Bean Declaration
+
+Most Spring Cloud Function apps have a relatively small scope compared to the whole of Spring Boot, so we are able to adapt it to these functional bean definitions easily. If you step outside that limited scope, you can extend your Spring Cloud Function app by switching back to @Bean style configuration, or by using a hybrid approach. If you want to take advantage of Spring Boot autoconfiguration for integrations with external datastores, for example, you will need to use @EnableAutoConfiguration. Your functions can still be defined using the functional declarations if you want (i.e. the "hybrid" style), but in that case you will need to explicitly switch off the "full functional mode" using spring.functional.enabled=false so that Spring Boot can take back control.
+Prev 	
+
+
+https://docs.gradle.org/current/userguide/jacoco_plugin.html#sec:configuring_the_jacoco_plugin
+
+https://www.youtube.com/watch?v=AI0dqP2OkGk
+
+https://blogs.oracle.com/javamagazine/understanding-java-method-invocation-with-invokedynamic
+https://www.infoworld.com/article/2860079/invokedynamic-101.html
+
+
+## Installing NuGet
+
+https://docs.microsoft.com/en-us/nuget/install-nuget-client-tools
+
+## Azure Application Insights
+
+An Application Performance Monitoring (APM) service provided by Azure
+
+Key metrics monitored:
+
+- dependency rates
+- exceptions
+- request rates
+- Page views
+- Load performance
+- HTTP calls
+- User and session counts
+- performance counters
+
+### Adding Application Insights instrumentation to Java projects
+
+- updates to pom.xml/build.gradle.kts
+- updadtes to **_host.json_** file
+- adding **trackers** at critical points in code execution

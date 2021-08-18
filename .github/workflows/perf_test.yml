@@ -5,14 +5,6 @@ on:
     # Trigger @ 5 min intervals
     - cron:  '*/5 * * * *'
 
-  push:
-    branches:
-      - main
-      - master
-      - azure-functions
-      - 'feature/**'
-      - 'releases/**'
-
 jobs:
   jmeter-run:
     runs-on: ubuntu-latest
