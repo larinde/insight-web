@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import yahoofinance.YahooFinance
 import yahoofinance.quotes.fx.FxSymbols
 import java.time.LocalDateTime
+import java.util.*
 
 @SpringBootTest
 @Disabled("Descoping testing for the time being")
@@ -58,6 +59,7 @@ class InsightWebApplicationTests {
 
 	fun getStockData()  {
 		println("##################################################")
+		UUID.randomUUID().toString()
 		val stock = YahooFinance.get("CLNE")
 		assertThat(stock).isNotNull()
 		println(stock.getQuote().getPrice())
