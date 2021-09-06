@@ -4,6 +4,7 @@ import com.microsoft.azure.functions.*
 import com.microsoft.azure.functions.annotation.FunctionName
 import com.microsoft.azure.functions.annotation.AuthorizationLevel
 import com.microsoft.azure.functions.annotation.HttpTrigger
+import org.slf4j.MDC
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 
@@ -18,6 +19,7 @@ class QueryHandler : FunctionInvoker<RequestWrapper?,  Any>() {
     ): HttpResponseMessage {
         val data = request.body
         context.logger.info("\n\n>>> INBOUND: $data\n\n")
+        MDC.put("requestId", context.invocationId)
         return  request
             .createResponseBuilder(HttpStatus.OK)
             .body(handleRequest(data, context))

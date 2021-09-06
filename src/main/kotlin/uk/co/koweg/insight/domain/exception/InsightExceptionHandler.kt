@@ -9,6 +9,7 @@ import graphql.execution.DataFetcherExceptionHandler
 import graphql.execution.DataFetcherExceptionHandlerParameters
 import graphql.execution.DataFetcherExceptionHandlerResult
 import org.slf4j.LoggerFactory
+import org.slf4j.MDC
 import org.springframework.stereotype.Component
 import java.lang.RuntimeException
 import java.time.Instant
@@ -30,7 +31,9 @@ class InsightExceptionHandler : DataFetcherExceptionHandler {
         return if (exception is InvalidPortfolioException) {
             LOG.info("\n%%%%%%%%%%%%%%\nInvalidPortfolioException ERROR INTERCEPTED \n%%%%%%%%%%%%%%\n")
             DateTimeFormatter.ISO_INSTANT.format(Instant.now()).toString()
-            val debugInfo = mapOf<String, String>("timestamp" to Instant.now().toString())
+            val debugInfo = mapOf<String, String>("timestamp" to Instant.now().toString(),
+                "requestId" to MDC.get("requestId")
+            )
             DataFetcherExceptionHandlerResult.newResult()
                     .error(TypedGraphQLError
                             .newBadRequestBuilder()
@@ -38,7 +41,7 @@ class InsightExceptionHandler : DataFetcherExceptionHandler {
                             .build())
                     .build()
         } else {
-            LOG.info("\n%%%%%%%%%%%%%%\nSOME OTHER ERROR INTERCEPTED \n%%%%%%%%%%%%%%\n")
+            LOG.info("*** SOME OTHER ERROR INTERCEPTED ***")
             defaultHandler.onException(params)
         }
     }

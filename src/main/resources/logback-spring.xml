@@ -1,36 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="true">
-  <include resource="org/springframework/boot/logging/logback/defaults.xml" />
-  <property name="LOG_PATTERN" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){green} %clr(:){faint} %m | %mdc %n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}" />
+  <!-- logback.qos.ch/manual/layouts.html -->
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
-  <springProperty scope="context" name="appName" source="info.app.name"/>
+  <springProperty scope="context" name="appName" source="spring.application.name"/>
   <springProperty scope="context" name="appVersion" source="info.app.version"/>
 
+  <property name="LOG_PATTERN"
+  value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){green} %clr(:){faint} %m | %mdc %n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+  <property name="AZURE_LOG_PATTERN"
+  value=" %green(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] APP:${appName:- } REQUESTID:${requestId:- } %clr(${PID}){faint} %clr(---) %yellow(%C{1.}): %msg%n%throwable;%n" />
+
+<!--
   <springProfile name="!logstash">
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
       <layout class="ch.qos.logback.classic.PatternLayout">
         <Pattern>${LOG_PATTERN}</Pattern>
       </layout>
     </appender>
-    <appender name="aiAppender" class="ch.qos.logback.core.helpers.NOPAppender"/>
+    <appender name="aiAppender" class="ch.qos.logback.core.ConsoleAppender">
+      <layout class="ch.qos.logback.classic.PatternLayout">
+        <Pattern>${AZURE_LOG_PATTERN}</Pattern>
+      </layout>
+    </appender>
   </springProfile>
-
   <springProfile name="logstash">
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
       <encoder class="net.logstash.logback.encoder.LogstashEncoder">
         <includeCallerInfo>true</includeCallerInfo>
       </encoder>
     </appender>
-
-    <appender name="aiAppender" class="com.microsoft.applicationinsights.logback.ApplicationInsightsAppender"/>
   </springProfile>
+-->
+
+  <appender name="aiAppender" class="com.microsoft.applicationinsights.logback.ApplicationInsightsAppender"/>
+  <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>${AZURE_LOG_PATTERN}</Pattern>
+    </layout>
+  </appender>
+
 
   <logger name="uk.co.koweg.insight" additivity="false" level="DEBUG">
     <appender-ref ref="consoleAppender"/>
     <appender-ref ref="aiAppender"/>
   </logger>
 
-  <logger name="org.springframework" additivity="false" level="DEBUG" >
+  <logger name="org.springframework" additivity="false" level="DEBUG">
     <appender-ref ref="consoleAppender"/>
     <appender-ref ref="aiAppender"/>
   </logger>
