@@ -1,18 +1,27 @@
 package com.koweg.insight.domain.datafetchers
 
+import com.koweg.insight.domain.exception.UnexpectedErrorException
+import com.koweg.insight.domain.generated.DgsConstants
 import com.koweg.insight.domain.generated.types.StockAlert
 import com.netflix.graphql.dgs.DgsComponent
-import com.netflix.graphql.dgs.DgsQuery
+import com.netflix.graphql.dgs.DgsData
+import java.util.concurrent.atomic.AtomicInteger
 
 @DgsComponent
 class StockAlertsDataFetcher {
-    private val stockAlertRepository= listOf<StockAlert>(
-        StockAlert("1", "BNGO", 100, 5.23, 7.15),
-        StockAlert("2", "BNGO", 5000, 10.00, 15.00),
-        StockAlert("3", "SRNG", 100, 9.00, 9.75))
+    companion object {
+        val idGenerator = AtomicInteger(1)
+    }
 
-    @DgsQuery
-    fun getAllStockAlerts(): List<StockAlert>{
+    private val stockAlertRepository= listOf<StockAlert>(
+        StockAlert(idGenerator.getAndIncrement().toString(), "CRBU", 20.00, 25.00),
+        StockAlert(idGenerator.getAndIncrement().toString(), "NSTB", 9.5, 10.00),
+        StockAlert(idGenerator.getAndIncrement().toString(), "WFC", 45.0, 50.00),
+        StockAlert(idGenerator.getAndIncrement().toString(), "SOFI", 15.00, 18.00),
+        StockAlert(idGenerator.getAndIncrement().toString(), "DNA", 9.00, 14.75))
+
+    @DgsData(parentType = DgsConstants.QUERY.TYPE_NAME, field = DgsConstants.QUERY.GetAllStockAlerts)
+    fun retrieveStockAlerts(): List<StockAlert>{
         return stockAlertRepository
     }
 

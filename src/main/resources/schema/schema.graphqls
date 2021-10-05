@@ -6,54 +6,33 @@ type Query {
     """
     Retrieve portfolio and their positions by unique portfolio identifier.
     """
-    portfolios(portfolioId: String): [Portfolio]
+    portfolios(portfolioId: PortfolioInput): [Portfolio]
     getWatchlist: [Watchlist]
     getExchangeRates(currency: Currency!) : CurrencyQuote
 }
 
+type Mutation {
+    addStockAlert(stockAlertInput: StockAlertInput) : Boolean
+}
 
+input PortfolioInput {
+    portfolioId: String
+}
 
-
-#type Mutation {
-#    addReview(review: SubmittedReview): [Review]
-#    addArtwork(showId: Int!, upload: Upload!): [Image]! @skipcodegen
-#}
-#
-#type Subscription {
-#    reviewAdded(showId: Int!): Review
-#}
-#
-#type Show {
-#    id: Int!
-#    title: String!
-#    releaseYear: Int
-#    reviews: [Review]
-#    artwork: [Image]
-#}
-#
-#type Review {
-#    username: String
-#    starScore: Int
-#    submittedDate: DateTime
-#}
-#
-#input SubmittedReview {
-#    showId: Int!
-#    username: String!
-#    starScore: Int!
-#}
-#
-#type Image {
-#    url: String
-#}
-
+input StockAlertInput{
+    symbol: String!
+    isin: String!
+    exchange: String
+    lowerLimit: Float!
+    upperLimit: Float!
+}
 
 
 
 
 schema {
     query: Query
-#    mutation: Mutation
+    mutation: Mutation
 #    subscription: Subscription
 }
 
@@ -76,15 +55,16 @@ enum Currency {
 }
 
 
-type  Quotes{
-    currency: String!
-    quote: Float!
-}
 
 type CurrencyQuote {
     baseCurrency: String!
     timeStamp: Int
     quotes: [Quotes]!
+}
+
+type  Quotes{
+    currency: String!
+    quote: Float!
 }
 
 type CurrentStockPrice{
@@ -108,20 +88,10 @@ type Watchlist implements Stock{
     isin: String!
     symbol: String!
     stockName: String!
+    quantity: Int!
     marketRate: Float!
     currency: String
 }
-
-
-type Position implements Stock{
-    isin: String!
-    symbol: String!
-    stockName: String!
-    marketRate: Float!
-    quantitiy: Int!
-    currency: String
-}
-
 
 type Portfolio {
     portfolioName: String!
@@ -130,20 +100,23 @@ type Portfolio {
     lastUpdated: DateTime
 }
 
+type Position implements Stock{
+    isin: String!
+    symbol: String!
+    stockName: String!
+    marketRate: Float!
+    quantity: Int!
+    currency: String
+}
+
+
 type StockAlert{
     id: ID!
     isin: String!
-    quantity: Int!
     lowerLimit: Float!
     upperLimit: Float!
 }
 
-input StockAlertInput{
-    isin: String!
-    quantity: Int!
-    lowerLimit: Float!
-    upperLimit: Float!
-}
 
 scalar DateTime
 scalar Upload

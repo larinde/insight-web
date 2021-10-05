@@ -1,6 +1,8 @@
 package com.koweg.insight.domain.services
 
 import com.koweg.insight.domain.generated.types.Position
+import com.microsoft.applicationinsights.TelemetryClient
+import com.microsoft.applicationinsights.web.internal.ThreadContext
 import org.springframework.stereotype.Service
 
 interface PositionService {
@@ -22,10 +24,12 @@ private val positionRepository = mapOf<String, MutableList<Position>>(
 )
 
 @Service
-class PositionServiceImpl : PositionService {
+class PositionServiceImpl: PositionService {
     override fun positionsForPortfolio(portfolioNames: List<String>): Map<String, List<Position>> {
-        println("\n***********loading  portfolio positions: " + portfolioNames.get(0))
+        val context = ThreadContext.getRequestTelemetryContext()
+        val telemetryClient = TelemetryClient()
+        println("\n********  Request ID (client) = ${telemetryClient?.context?.operation?.id} -- loading  portfolio positions: ${portfolioNames.get(0)}")
+        println("\n********  Request ID (thread) = ${context?.httpRequestTelemetry?.context?.operation?.id} -- loading  portfolio positions: ${portfolioNames.get(0)}")
         return positionRepository.filter { portfolioNames.contains(it.key) }
     }
-
 }

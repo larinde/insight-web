@@ -18,11 +18,7 @@ class PositionDataFetcher(val positionService : PositionService) {
     @DgsData(parentType = DgsConstants.PORTFOLIO.TYPE_NAME, field = DgsConstants.PORTFOLIO.Positions)
     fun getPositions(dfe: DgsDataFetchingEnvironment): CompletableFuture<List<Position>> {
         val positionsLoader : DataLoader<String, List<Position>> = dfe.getDataLoader(PositionsDataLoader::class.java)
-
         val po : Portfolio = dfe.getSource()
-
-        println("\n***********loading  portfolio positions: " + po.portfolioName)
-
         return  positionsLoader.load(po.portfolioName)
     }
 

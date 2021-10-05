@@ -46,6 +46,9 @@ dependencies {
 	)
 	implementation("io.arrow-kt:arrow-core")
 
+	implementation("com.microsoft.azure:applicationinsights-spring-boot-starter:2.6.3")
+	implementation("io.micrometer:micrometer-core:1.7.4")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
@@ -66,10 +69,14 @@ dependencyManagement {
 plugins {
 	id("org.springframework.boot") version "2.4.5"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	id ("com.microsoft.azure.azurewebapp") version "1.1.0"
 	kotlin("jvm") version "1.4.32"
 	kotlin("plugin.spring") version "1.4.32"
 	id("com.netflix.dgs.codegen") version "4.4.1"
+
 	jacoco
+
+	id("org.sonarqube") version "3.3"
 }
 
 jacoco {
@@ -96,4 +103,26 @@ tasks.withType<Test> {
 tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
 	generateClient = true
 	packageName = "com.koweg.insight.domain.generated"
+}
+
+azurewebapp {
+	//subscription = "<your subscription id>"
+	resourceGroup = "rgInsight"
+	appName = "apsvInsight"
+	pricingTier = "F1"
+	region = "northeurope"
+	allowTelemetry = false
+	setRuntime(closureOf<com.microsoft.azure.gradle.configuration.GradleRuntimeConfig> {
+		os("Linux")
+		webContainer("Java SE")
+		javaVersion("Java 11")
+	})
+	setAppSettings(closureOf<MutableMap<String, String>> {
+		put("APPINSIGHTS_INSTRUMENTATIONKEY", "b534d9c4-bbec-41f5-a634-c36377c11813")
+		put("APPLICATIONINSIGHTS_CONNECTION_STRING", "InstrumentationKey=b534d9c4-bbec-41f5-a634-c36377c11813")
+		put("ApplicationInsightsAgent_EXTENSION_VERSION", "~3")
+	})
+	setAuth(closureOf<com.microsoft.azure.gradle.auth.GradleAuthConfig> {
+		type = "azure_cli"
+	})
 }

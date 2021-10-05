@@ -11,7 +11,6 @@ interface PortfolioService {
 @Service
 class PortfolioServiceImpl : PortfolioService {
 
-
     override fun portfolios(): List<Portfolio> {
         return listOf<Portfolio>(
             Portfolio(portfolioName = "ING", currency =  "EUR", lastUpdated =  OffsetDateTime.now().minusDays(1)),

@@ -1,5 +1,6 @@
 package com.koweg.insight
 
+import com.microsoft.applicationinsights.TelemetryClient
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import graphql.Scalars
@@ -9,15 +10,6 @@ import graphql.schema.idl.RuntimeWiring
 import com.netflix.graphql.dgs.DgsRuntimeWiring
 
 import com.netflix.graphql.dgs.DgsComponent
-import com.netflix.graphql.dgs.DgsScalar
-import graphql.language.StringValue
-import graphql.schema.Coercing
-import graphql.schema.CoercingParseLiteralException
-import graphql.schema.CoercingParseValueException
-import graphql.schema.CoercingSerializeException
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-//import graphql.scalars.ExtendedScalars
 
 
 @SpringBootApplication
@@ -34,6 +26,7 @@ class BigDecimalScalarRegistration {
         return builder.scalar(Scalars.GraphQLBigDecimal)
     }
 }
+
 
 /*
 @DgsScalar(name = "DateTime")

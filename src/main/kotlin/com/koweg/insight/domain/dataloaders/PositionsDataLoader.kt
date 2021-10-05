@@ -12,6 +12,7 @@ import kotlin.streams.toList
 class PositionsDataLoader(val positionService: PositionService) : MappedBatchLoader<String, List<Position>> {
 
     override fun load(keys: MutableSet<String>): CompletionStage<Map<String, List<Position>>>? {
+        println("\n******* invoking loader ******* ")
         return CompletableFuture.supplyAsync{positionService.positionsForPortfolio(keys.stream().toList())}
     }
 
