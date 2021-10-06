@@ -57,7 +57,8 @@ dependencies {
 //	implementation("org.springframework.boot:spring-boot-starter-web"){
 //		exclude("com.fasterxml.jackson.core")
 //	}
-	//implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5")
+
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -85,7 +86,6 @@ dependencies {
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
-	//testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("com.jayway.jsonpath:json-path:2.2.0")
 	testImplementation("io.mockk:mockk:1.11.0")
 	testImplementation("org.assertj:assertj-core:3.19.0")

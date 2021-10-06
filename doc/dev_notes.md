@@ -133,6 +133,12 @@ https://docs.microsoft.com/en-us/nuget/install-nuget-client-tools
 
 An Application Performance Monitoring (APM) service provided by Azure
 
+- supports distributed telemetry correlation
+  - detect components responsible for failure
+  - identify performance degradation
+  - provides a data model for distributed telemetry degradation
+  - __opertion_id__ shared by every telemetry item in a distributed trace
+
 Key metrics monitored:
 
 - dependency rates
@@ -149,3 +155,29 @@ Key metrics monitored:
 - updates to pom.xml/build.gradle.kts
 - updadtes to **_host.json_** file
 - adding **trackers** at critical points in code execution
+
+
+
+https://azurefctnspring.azurewebsites.net/api/graphql
+
+mvn clean package azure-functions:run
+
+
+__debugging__
+
+```bash
+ mvn clean package azure-functions:run -DenableDebug
+```
+
+## Observability
+
+Aspects:
+- Logging
+- Monitoring
+- Distributed Tracing
+
+Signals:
+
+1.Logs: Discrete events, that are timestamped and structured
+2. Metrics: Regularly sampled data points with numeric value and dimension
+3. Traces: Request path across a number of services

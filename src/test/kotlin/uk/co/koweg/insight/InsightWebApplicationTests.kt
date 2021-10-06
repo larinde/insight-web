@@ -65,10 +65,10 @@ class InsightWebApplicationTests {
 		println(stock.getQuote().getPrice())
 		println(stock.print())
 		println("---------------------------------------------------")
-		val currencies = listOf<String>(FxSymbols.USDGBP,
-			FxSymbols.USDGBP,
-			FxSymbols.USDHKD,
-			FxSymbols.USDCAD)
+//		val currencies = listOf<String>(FxSymbols.USDGBP,
+//			FxSymbols.USDGBP,
+//			FxSymbols.USDHKD,
+//			FxSymbols.USDCAD)
 		val usdToGbp = YahooFinance.getFx(FxSymbols.USDGBP)
 		println(LocalDateTime.now().toString())
 		println(usdToGbp.toString())

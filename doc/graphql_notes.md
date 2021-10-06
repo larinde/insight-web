@@ -135,7 +135,6 @@ Authorisation Patterns
    - redirect incoming request - without token - to Authorisation Server
    - forward incoming request with token to downstream service
    - aggregate and transform downstream responses
-
 2. www
 
 #### Goals
@@ -179,3 +178,44 @@ https://github.com/hysnsec/DevSecOps-Studio
 https://github.com/swisskyrepo
 https://github.com/swisskyrepo/PayloadsAllTheThings
 ```
+
+
+## Authentication and Error Handling
+
+- Resolvers: Bind portions of a request to functionality in the data layer
+- Data layer: Services that exchange data models
+
+### Access Control Strategies
+
+1. Access control rules in the model layer
+2. Access control rules in resolvers
+   1. pass request through a chain of resolvers
+      1. IsAuthenticatedResolver
+      2. IsAuthorisedResolver
+   2. aaa
+
+### Error Handling Challenges
+
+1. Categorising errors
+2. Determining order of priority in multi-error response scenarios
+3. Logging message ids
+4. Mapping HTTP error codes
+5. Masking sensitive error data
+6. Defining a standard _external_ error format
+   1. Message
+   2. Timestamp
+   3. responseId/messageId
+7. Defining a standard _internal_ error format
+   1. responseId/messageId
+   2. service id
+   3. Timestamp
+   4. error payload
+8. Determine and override FW handler
+   1. GraphQLErrorHandler
+
+
+## Security Checks
+
+1. Disable introspection
+2. Nested query depth
+3. Query whitelisting

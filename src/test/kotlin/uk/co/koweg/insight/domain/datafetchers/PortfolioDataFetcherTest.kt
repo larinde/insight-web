@@ -21,7 +21,7 @@ import uk.co.koweg.insight.domain.services.PortfolioService
 import java.time.OffsetDateTime
 
 //@Disabled
-@SpringBootTest(classes = [PortfolioDataFetcher::class, PositionDataFetcher::class, PositionsDataLoader::class, PositionService::class, DateTimeScalarRegistration::class, DgsAutoConfiguration::class])
+@SpringBootTest(classes = [DateTimeScalarRegistration::class, DgsAutoConfiguration::class])
 class PortfolioDataFetcherTest {
 
     @Autowired

@@ -1,5 +1,9 @@
 type Query {
     """
+    Aggregate root
+    """
+    securities: [Securities]
+    """
     Retrieve all stock alerts
     """
     getAllStockAlerts: [StockAlert]
@@ -7,16 +11,9 @@ type Query {
     Retrieve portfolio and their positions by unique portfolio identifier.
     """
     portfolios(portfolioId: String): [Portfolio]
-    getWatchlist: [Watchlist]
-    getExchangeRates(currency: Currency!) : CurrencyQuote
+    #getWatchlist: [Watchlist]
+    #getExchangeRates(currency: Currency!) : CurrencyQuote
 }
-
-
-#schema {
-#    query: Query
-#    mutation: Mutation
-#    subscription: Subscription
-#}
 
 #type Mutation {
 #    addStockAlert(alert: StockAlertInput): StockAlert
@@ -27,6 +24,12 @@ type Query {
 #}
 
 
+type Securities {
+    portfolios(portfolioId: String): [Portfolio]
+    watchlist: [Watchlist]
+    stockAlerts: [StockAlert]
+    exchangeRates(currency: Currency!) : CurrencyQuote
+}
 
 
 enum Currency {
