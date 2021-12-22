@@ -1,7 +1,7 @@
 HELP.md
 .gradle
 build/
-!gradle/wrapper/gradle-wrapper.jar
+gradle/*
 !**/src/main/**/build/
 !**/src/test/**/build/
 
@@ -10,8 +10,7 @@ build/
 .springBeans
 .sts4-cache
 bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+
 **/.classpath
 .factorypath
 **/.project
@@ -25,8 +24,7 @@ bin/
 *.iml
 *.ipr
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+
 dependency-reduced-pom.xml
 /*~
 **/.mvn
@@ -44,11 +42,11 @@ dependency-reduced-pom.xml
 
 
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**
-!**/src/test/**
+.mvn/
+
 
 
 
 .~lock.*
 **/private_notes.md
+**/private
