@@ -1,6 +1,29 @@
+# Release workflow
 name: Release workflow
 
+# trigger - runs on any commit tag beginning with 'v'
 on:
   push:
     tags:
       - "v*"
+
+jobs:
+  build:
+    name: "Create release"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: JDK setup
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - name: Create Release
+        uses: actions/create-release@v1
+        id: release_creation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }} # v${{ github.run-number }}
