@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build-artifact
-          path: build/**/libs/*
+          path: build/libs/*
 
   release-project:
     name: Create Application Release
@@ -55,6 +55,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_new_release.outputs.upload_url }} #https://docs.github.com/en/actions/learn-github-actions/environment-variables
-          asset_path: ./*
+          asset_path: ./${{ env.RELEASE_ARTIFACT_NAME }}.jar
           asset_name: ${{ env.RELEASE_ARTIFACT_NAME }}.jar
           asset_content_type: application/java-archive

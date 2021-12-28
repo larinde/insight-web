@@ -97,3 +97,7 @@ tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
 	generateClient = true
 	packageName = "com.koweg.insight.domain.generated"
 }
+
+tasks.bootJar {
+    archiveFileName.set("${project.name}.jar")
+}
