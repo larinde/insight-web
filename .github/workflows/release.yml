@@ -47,7 +47,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }} # v${{ github.run-number }}
       - name: Set Project Artifact Name
-        run: echo "RELEASE_ARTIFACT_NAME=insight-fe" >> $GITHUB_ENV
+        run: echo "RELEASE_ARTIFACT_NAME=insight-web" >> $GITHUB_ENV
         shell: bash
       - name: Upload Artifacts to GitHub Release
         uses: actions/upload-release-asset@v1
