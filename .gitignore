@@ -48,4 +48,4 @@ target/
 
 .~lock.*
 **/private_notes.md
-**/private
+*.env

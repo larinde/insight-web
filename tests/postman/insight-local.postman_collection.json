@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "d84cdd6c-51a3-419c-8d30-b29e1ad05131",
+		"name": "insight-azure",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "queries",
+			"item": [
+				{
+					"name": "getAllStockAlerts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query getAllStockAlerts {\n    getAllStockAlerts {\n        id\n        isin\n        quantity\n        lowerLimit\n        upperLimit\n    }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "portfolios",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query portfolios ($portfolioId: String) {\n    portfolios (portfolioId: $portfolioId) {\n        portfolioName\n        currency\n        positions {\n            isin\n            symbol\n            stockName\n            marketRate\n            quantitiy\n            currency\n        }\n        lastUpdated\n    }\n}",
+								"variables": "{\n  \"portfolioId\": \"\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getWatchlist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query getWatchlist {\n    getWatchlist {\n        isin\n        symbol\n        stockName\n        marketRate\n        currency\n    }\n}",
+								"variables": "{}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getExchangeRates",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query getExchangeRates ($currency: Currency!) {\n    getExchangeRates (currency: $currency) {\n        baseCurrency\n        timeStamp\n        quotes {\n            currency\n            quote\n        }\n    }\n}",
+								"variables": "{\n  \"currency\": \"\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET_PORTFOLIO_ING",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n  portfolios(portfolioId: \"\") {\n    portfolioName\n    positions {\n      isin\n      symbol\n      stockName\n      marketRate\n      quantitiy\n      currency\n    }\n    currency\n    lastUpdated\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllStockAlerts",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n  getAllStockAlerts{\n    id\n    isin\n    quantity\n    lowerLimit\n    upperLimit\n  }\n}\n",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "",
+			"type": "any",
+			"description": "URL for the request."
+		}
+	]
+}

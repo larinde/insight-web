@@ -12,84 +12,85 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 val deployArtifact = "insight-web.jar"
 
+version = "0.0.1-SNAPSHOT"
+//java.sourceCompatibility = JavaVersion.VERSION_1_8
+java.sourceCompatibility = JavaVersion.VERSION_11
+
 repositories {
 	mavenCentral()
 	mavenLocal()
 }
 
 plugins {
-	kotlin("jvm") version "1.6.10"
-	kotlin("plugin.spring") version "1.6.10"
-	id("org.springframework.boot") version "2.4.5"
+	id("org.springframework.boot") version "2.6.3"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	id("com.netflix.dgs.codegen") version "4.4.1"
-    id("com.bmuschko.docker-remote-api") version "7.2.0"
-	jacoco
+	kotlin("jvm") version "1.7.10"
+	kotlin("plugin.spring") version "1.7.10"
+	id("com.netflix.dgs.codegen") version "5.2.4"
+	//jacoco
 }
 
-extra["springCloudVersion"] = "2020.0.3"
+extra["springCloudVersion"] = "2021.0.3"
 
 
-extra["arrowVersion"] = "0.13.2"
-extra["testcontainersVersion"] = "1.15.3"
+
 dependencies {
-
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-cache")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	implementation("org.springframework.cloud:spring-cloud-stream")
+
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-	implementation("org.springframework.cloud:spring-cloud-stream")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
 
 	implementation("com.yahoofinance-api:YahooFinanceAPI:3.15.0")
 
+	implementation("com.github.javafaker:javafaker:1.+")
 
-	implementation(
-		platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:4.3.1")
-	)
+	//implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:3.11.0"))
+	implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:latest.release"))
 	implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
 	implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
 	implementation("com.netflix.graphql.dgs:graphql-dgs-subscriptions-websockets-autoconfigure")
 
-	implementation(
-		platform("io.arrow-kt:arrow-stack:${property("arrowVersion")}")
-	)
-	implementation("io.arrow-kt:arrow-core")
-
-
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo")
 	testImplementation("io.projectreactor:reactor-test")
-	testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("com.jayway.jsonpath:json-path:2.2.0")
 	testImplementation("io.mockk:mockk:1.11.0")
 	testImplementation("org.assertj:assertj-core:3.19.0")
+	testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
+	//testImplementation("junit:junit:4.13.2")
 }
 
 dependencyManagement {
 	imports {
-		mavenBom("org.testcontainers:testcontainers-bom:${property("testcontainersVersion")}")
 		mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
 	}
 }
 
+/**
 jacoco {
-	toolVersion = "0.8.7"
+	toolVersion = "0.8.8"
 	reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
 }
 
 tasks.test{
 	finalizedBy(tasks.jacocoTestReport)
 }
+*/
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "1.8"
+		//jvmTarget = "1.8"
+		jvmTarget = "11"
 	}
 }
 
