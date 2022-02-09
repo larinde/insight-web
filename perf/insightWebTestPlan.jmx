@@ -1,66 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.1.1 r1855137">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.3">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="StationManagementTest Plan" enabled="true">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="BFF PoC Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments">
-          <elementProp name="SM_HOST" elementType="Argument">
-            <stringProp name="Argument.name">SM_HOST</stringProp>
-            <stringProp name="Argument.value">localhost</stringProp>
+          <elementProp name="BFF_POC_HOST" elementType="Argument">
+            <stringProp name="Argument.name">BFF_POC_HOST</stringProp>
+            <stringProp name="Argument.value">192.168.99.101</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="SM_PORT" elementType="Argument">
-            <stringProp name="Argument.name">SM_PORT</stringProp>
-            <stringProp name="Argument.value">7000</stringProp>
+          <elementProp name="BFF_POC_PORT" elementType="Argument">
+            <stringProp name="Argument.name">BFF_POC_PORT</stringProp>
+            <stringProp name="Argument.value">7071</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="SM_CONTEXT_GET_CHARGING_STATIONS" elementType="Argument">
-            <stringProp name="Argument.name">SM_CONTEXT_GET_CHARGING_STATIONS</stringProp>
-            <stringProp name="Argument.value">/chargingstations</stringProp>
+          <elementProp name="BFF_POC_CONTEXT_GRAPHQL" elementType="Argument">
+            <stringProp name="Argument.name">BFF_POC_CONTEXT_GRAPHQL</stringProp>
+            <stringProp name="Argument.value">/graphql</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="SM_PROTOCOL" elementType="Argument">
-            <stringProp name="Argument.name">SM_PROTOCOL</stringProp>
+          <elementProp name="BFF_POC_PROTOCOL" elementType="Argument">
+            <stringProp name="Argument.name">BFF_POC_PROTOCOL</stringProp>
             <stringProp name="Argument.value">http</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="SM_API_USER" elementType="Argument">
-            <stringProp name="Argument.name">SM_API_USER</stringProp>
-            <stringProp name="Argument.value">st4!onM4n4g3m3nt</stringProp>
+          <elementProp name="BFF_POC_API_USER" elementType="Argument">
+            <stringProp name="Argument.name">BFF_POC_API_USER</stringProp>
+            <stringProp name="Argument.value">pocuser</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="SM_API_PASSWORD" elementType="Argument">
-            <stringProp name="Argument.name">SM_API_PASSWORD</stringProp>
-            <stringProp name="Argument.value">r3st4p!4SM</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="SM_INT_API_USER" elementType="Argument">
-            <stringProp name="Argument.name">SM_INT_API_USER</stringProp>
-            <stringProp name="Argument.value">sm-admin</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="SM_INT_API_PASSWORD" elementType="Argument">
-            <stringProp name="Argument.name">SM_INT_API_PASSWORD</stringProp>
-            <stringProp name="Argument.value">bcPF8vuo/6hD+h26SoCe&quot;D;f/zRgNm</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="SM_INT_HOST" elementType="Argument">
-            <stringProp name="Argument.name">SM_INT_HOST</stringProp>
-            <stringProp name="Argument.value">station-management-int.cfapps.preprod.pc.innogy.com</stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="SM_INT_PORT" elementType="Argument">
-            <stringProp name="Argument.name">SM_INT_PORT</stringProp>
-            <stringProp name="Argument.value"></stringProp>
-            <stringProp name="Argument.metadata">=</stringProp>
-          </elementProp>
-          <elementProp name="SM_INT_PROTOCOL" elementType="Argument">
-            <stringProp name="Argument.name">SM_INT_PROTOCOL</stringProp>
-            <stringProp name="Argument.value">https</stringProp>
+          <elementProp name="BFF_POC_API_PASSWORD" elementType="Argument">
+            <stringProp name="Argument.name">BFF_POC_API_PASSWORD</stringProp>
+            <stringProp name="Argument.value">pocpassword</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -137,34 +112,16 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">100</stringProp>
+          <stringProp name="LoopController.loops">10</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">20</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">1000</stringProp>
+        <stringProp name="ThreadGroup.num_threads">3</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">2</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getChargingStations Request" enabled="true">
-          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="HTTPSampler.domain">${SM_INT_HOST}</stringProp>
-          <stringProp name="HTTPSampler.port">${SM_INT_PORT}</stringProp>
-          <stringProp name="HTTPSampler.protocol">${SM_INT_PROTOCOL}</stringProp>
-          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-          <stringProp name="HTTPSampler.path">${SM_CONTEXT_GET_CHARGING_STATIONS}?page=0&amp;pagesize=100</stringProp>
-          <stringProp name="HTTPSampler.method">GET</stringProp>
-          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
-        </HTTPSamplerProxy>
-        <hashTree/>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
@@ -199,7 +156,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">C:\tmp\performance_tests\sm\jmeter-results\result_view_output.csv</stringProp>
+          <stringProp name="filename">/tmp/result_view_output.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
@@ -242,8 +199,12 @@
         <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
           <collectionProp name="HeaderManager.headers">
             <elementProp name="" elementType="Header">
-              <stringProp name="Header.name">Authorization</stringProp>
-              <stringProp name="Header.value">Basic c20tYWRtaW46YmNQRjh2dW8vNmhEK2gyNlNvQ2UiRDtmL3pSZ05t</stringProp>
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/json</stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Accept</stringProp>
+              <stringProp name="Header.value">*/*</stringProp>
             </elementProp>
           </collectionProp>
         </HeaderManager>
@@ -355,15 +316,53 @@
           <stringProp name="limitRows">150</stringProp>
           <stringProp name="lineWeight"></stringProp>
           <stringProp name="lowCountLimit"></stringProp>
-          <stringProp name="outputBaseFolder">C:\tmp\performance_tests\sm\jmeter-results</stringProp>
+          <stringProp name="outputBaseFolder">/tmp</stringProp>
           <boolProp name="paintGradient">true</boolProp>
           <boolProp name="paintZeroing">true</boolProp>
           <boolProp name="preventOutliers">false</boolProp>
           <boolProp name="relativeTimes">false</boolProp>
-          <stringProp name="resultsFileName">C:\tmp\performance_tests\sm\jmeter-results\result_view_output.csv</stringProp>
+          <stringProp name="resultsFileName">/tmp/result_view_output.csv</stringProp>
           <stringProp name="startOffset"></stringProp>
           <stringProp name="successFilter"></stringProp>
         </kg.apc.jmeter.listener.GraphsGeneratorListener>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="GraphQLHTTPSamplerGui" testclass="HTTPSamplerProxy" testname="GET_ALL_STOCKS_QUERY" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument" enabled="true">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;operationName&quot;:null,&quot;query&quot;:&quot;{\n  getAllStockAlerts{\n    id\n    isin\n    quantity\n    lowerLimit\n    upperLimit\n  }\n}&quot;}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${BFF_POC_HOST}</stringProp>
+          <stringProp name="HTTPSampler.port">${BFF_POC_PORT}</stringProp>
+          <stringProp name="HTTPSampler.protocol">${BFF_POC_PROTOCOL}</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${BFF_POC_CONTEXT_GRAPHQL}</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="GraphQLHTTPSampler.operationName"></stringProp>
+          <stringProp name="GraphQLHTTPSampler.query">{
+  getAllStockAlerts{
+    id
+    isin
+    quantity
+    lowerLimit
+    upperLimit
+  }
+}</stringProp>
+          <stringProp name="GraphQLHTTPSampler.variables"></stringProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
         <hashTree/>
       </hashTree>
     </hashTree>
