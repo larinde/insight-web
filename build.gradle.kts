@@ -1,14 +1,30 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
 group = "com.koweg.insight"
 
-
-
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+//java.sourceCompatibility = JavaVersion.VERSION_1_8
+java.sourceCompatibility = JavaVersion.VERSION_11
+
+val deployArtifact = "insight-web.jar"
+
 repositories {
 	mavenCentral()
 	mavenLocal()
+}
+
+plugins {
+	kotlin("jvm") version "1.6.10"
+	kotlin("plugin.spring") version "1.6.10"
+	id("org.springframework.boot") version "2.4.5"
+	id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	id("com.netflix.dgs.codegen") version "4.4.1"
+    id("com.bmuschko.docker-remote-api") version "7.2.0"
+	jacoco
 }
 
 extra["springCloudVersion"] = "2020.0.3"
@@ -61,24 +77,14 @@ dependencyManagement {
 	}
 }
 
-plugins {
-	id("org.springframework.boot") version "2.4.5"
-	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	kotlin("jvm") version "1.4.32"
-	kotlin("plugin.spring") version "1.4.32"
-	id("com.netflix.dgs.codegen") version "4.4.1"
-	jacoco
-}
-
 jacoco {
-	toolVersion = "0.8.6"
+	toolVersion = "0.8.7"
 	reportsDirectory.set(layout.buildDirectory.dir("customJacocoReportDir"))
 }
 
 tasks.test{
 	finalizedBy(tasks.jacocoTestReport)
 }
-
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
@@ -97,5 +103,39 @@ tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
 }
 
 tasks.bootJar {
-    archiveFileName.set("${project.name}.jar")
+    archiveFileName.set("${deployArtifact}")
+}
+
+docker {
+    //url.set("https://192.168.99.101:2376")
+    //certPath.set(File(System.getProperty("user.home"), ".boot2docker/certs/boot2docker-vm"))
+	url.set("tcp://192.168.99.101:2376")
+
+//    registryCredentials {
+//        url.set("https://index.docker.io/v1/")
+//        username.set("larinde")
+//        password.set("secret")
+//        email.set("olarinde.ajai@gmail.com")
+//    }
+}
+
+// https://docs.gradle.org/current/userguide/kotlin_dsl.html
+val copyDeployArtifactForContainerisation by tasks.creating(Copy::class) {
+    from("${project.buildDir}/libs/${deployArtifact}")
+    into("${project.buildDir}/docker/")
+}
+
+val createDockerfile by tasks.creating(Dockerfile::class) {
+    from("openjdk:jre-alpine")
+    label(mapOf("maintainer" to "Olarinde Ajai 'olarinde.ajai@koweg.co.uk'"))
+    copyFile("${deployArtifact}", "/app/${deployArtifact}")
+    entryPoint("java")
+    defaultCommand("-jar", "/app/${deployArtifact}")
+    exposePort(7071)
+}
+
+tasks.create("buildImage", DockerBuildImage::class) {
+    dependsOn(copyDeployArtifactForContainerisation)
+    dependsOn(createDockerfile)
+    images.add("koweg/insight-web:latest")
 }
