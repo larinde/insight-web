@@ -5,6 +5,12 @@
 ```bash
  git checkout -b azure-functions
 ```
+```bash
+ sdk use java  11.0.16-zulu
+ ./gradle clean build
+ java -jar build/libs/insight-web-0.0.1-SNAPSHOT.jar
+```
+
 
 ## Links
 

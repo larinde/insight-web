@@ -27,6 +27,8 @@ plugins {
 	kotlin("jvm") version "1.7.10"
 	kotlin("plugin.spring") version "1.7.10"
 	id("com.netflix.dgs.codegen") version "5.2.4"
+
+	id ("com.bmuschko.docker-spring-boot-application") version "6.7.0"
 	//jacoco
 }
 

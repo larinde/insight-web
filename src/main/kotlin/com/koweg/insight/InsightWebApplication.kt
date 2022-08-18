@@ -27,6 +27,7 @@ fun main(args: Array<String>) {
     runApplication<InsightWebApplication>(*args)
 }
 
+/**
 @DgsComponent
 class BigDecimalScalarRegistration {
     @DgsRuntimeWiring
@@ -34,6 +35,7 @@ class BigDecimalScalarRegistration {
         return builder.scalar(Scalars.GraphQLBigDecimal)
     }
 }
+*/
 
 /*
 @DgsScalar(name = "DateTime")
