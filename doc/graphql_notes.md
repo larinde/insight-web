@@ -104,24 +104,4 @@
     ]
   }
 }
-
 ```
-
-
-
-
-
-
-
-
-## Wiremock
-
-http://localhost:8080/mock-service/mapping/__admin/
-
-java -jar wiremock-standalone-2.14.0.jar --port 9000 --proxyall http://localhost/accounting/v1/invoices
-
-
-
-curl -X GET "http://localhost/accounting/v1/invoices?fromDate=2001-01-31&toDate=2018-03-13&invoiceType=SALE" -H  "accept: application/json" -H  "Authorization: Bearer lwvfefvf" -H  "invoice-api-version: 1"
-
-
